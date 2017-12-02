@@ -1,0 +1,10 @@
+.form-parent{
+  width:100%;
+}
+.form-child{
+  width:100%;
+  float: left;
+}
+.form-control {
+  font-size: 16pt;
+}

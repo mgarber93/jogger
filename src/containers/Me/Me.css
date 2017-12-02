@@ -1,0 +1,20 @@
+.distanceCol {
+  width: 20%;
+}
+.timeCol {
+  width: 20%;
+}
+.dateCol {
+  width: 20%;
+}
+h2 {
+  text-align: left;
+  font-size: 24pt;
+}
+.btn {
+  margin: -3px 5px -3px 5px;
+  font-size: 12pt;
+}
+.table-responsive {
+  min-height: 80vh;
+}
