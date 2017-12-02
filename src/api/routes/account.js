@@ -10,12 +10,14 @@ const router = express.Router();
  */
 function hasManagerRights(req, res, next) {
   // user has full CRUD on their own data
-  if (req.user && String(req.params.accountId) === String(req.user._id)) {
+  if (!req.user) {
+    res.status(401).json({errors: {auth: 'You must be logged in!'}});
+  } else if (String(req.params.accountId) === String(req.user._id)) {
     next();
   } else if (req.user && ['MANAGER', 'ADMIN'].includes(req.user.role)) {
     next();
   } else {
-    res.status(401).json({errors: {auth: 'You must be logged in with manager rights!'}});
+    res.status(403).json({errors: {auth: 'You must have manager rights!'}});
   }
 }
 
@@ -24,15 +26,16 @@ function hasManagerRights(req, res, next) {
  */
 function hasAdminRights(req, res, next) {
   // user has full CRUD on their own data
-  if (req.user && String(req.params.accountId) === String(req.user._id)) {
+  if (!req.user) {
+    res.status(401).json({errors: {auth: 'You must be logged in!'}});
+  } else if (String(req.params.accountId) === String(req.user._id)) {
     next();
   } else if (req.user && req.user.role === 'ADMIN') {
     next();
   } else {
-    res.status(401).json({errors: {auth: 'You must be logged in with admin rights!'}});
+    res.status(403).json({errors: {auth: 'You must have admin rights!'}});
   }
 }
-
 
 router.route('/:accountId')
   .all(hasManagerRights)
@@ -40,7 +43,6 @@ router.route('/:accountId')
   .put(updateAccount)
   .patch(updateAccount)
   .delete(deleteAccount);
-
 
 router.route('/:accountId/jogs/')
   .all(hasAdminRights)
@@ -52,6 +54,5 @@ router.route('/:accountId/jogs/:jogId')
   .put(updateJog)
   .patch(updateJog)
   .delete(deleteJog);
-
 
 export default router;
