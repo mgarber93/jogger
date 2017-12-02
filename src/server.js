@@ -14,7 +14,6 @@ import configureStore from './redux';
 import App from './containers/App/App';
 import api from './api/index';
 import Account from './api/models/account';
-import local from './api/routes/auth-local';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -44,8 +43,7 @@ server
   }))
   .use(passport.initialize())
   .use(passport.session())
-  .use('/api/', api)
-  .use('/auth/local/', local)
+  .use('/', api)
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
     const context = {};
