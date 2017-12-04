@@ -15,6 +15,7 @@ const CHANGE_DISPLAY_ORDER = 'jogger/app/CHANGE_DISPLAY_ORDER';
 const initState = {
   editing: {},
   displayOrder: 'date',
+  jogs: [],
 };
 
 // reducer
