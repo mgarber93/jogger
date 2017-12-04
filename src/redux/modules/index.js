@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import app from './app';
+import jogs from './jogs';
 import auth from './auth';
-import { NEW_JOG } from '../modules/app';
+import { NEW_JOG } from '../modules/jogs';
 
 export default combineReducers({
-  app,
+  jogs,
   auth,
   form: formReducer.plugin({
     NewJog: (state, action) => {

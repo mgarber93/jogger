@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import Navbar from '../../components/Navbar/Navbar';
 import NewJogForm from '../../components/NewJogForm/NewJogForm';
-import { newJog } from '../../redux/modules/app';
+import { newJog } from '../../redux/modules/jogs';
 
 @connect(({ auth }) => ({ user: auth.user }), { newJog })
 export default class Jogs extends Component {

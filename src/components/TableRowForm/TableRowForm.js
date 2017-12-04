@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { stopEditing, updateJog as save } from '../../redux/modules/app';
+import { stopEditing, updateJog as save } from '../../redux/modules/jogs';
 import './TableRowForm.css';
 
 

@@ -4,16 +4,17 @@ import { Redirect } from 'react-router';
 import { Helmet } from 'react-helmet';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import Navbar from '../../components/Navbar/Navbar';
-import './Me.css';
-import { toggleEditing, stopEditing, changeDisplayOrder, removeJog, updateJog } from '../../redux/modules/app';
+import './Jogs.css';
+import { toggleEditing, stopEditing, changeDisplayOrder, removeJog, updateJog } from '../../redux/modules/jogs';
 import displaySort from '../../utils/sorters.js';
 import average from '../../utils/average.js';
 import TableRowForm from '../../components/TableRowForm/TableRowForm';
 
-@connect(({ auth, app }) => (
+@connect(({ auth, jogs }) => (
   {
     user: auth.user,
-    displayOrder: app.displayOrder
+    jogs: jogs.jogs,
+    displayOrder: jogs.displayOrder
   }
 ), {
   toggleEditing,
@@ -22,7 +23,7 @@ import TableRowForm from '../../components/TableRowForm/TableRowForm';
   removeJog,
   updateJog
 })
-export default class Me extends Component {
+export default class Jogs extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,8 +53,8 @@ export default class Me extends Component {
     });
   }
   render() {
-    const { toggleEditing, user, displayOrder, changeDisplayOrder, removeJog, updateJog } = this.props;
-    const { aveTime, totDistance, aveSpeed } = user ? average(user.jogs.filter(this.filter)) : {};
+    const { toggleEditing, user, jogs, displayOrder, changeDisplayOrder, removeJog, updateJog } = this.props;
+    const { aveTime, totDistance, aveSpeed } = user ? average(jogs.filter(this.filter)) : {};
     return (
       <div className="Me">
         <Navbar />
@@ -115,7 +116,7 @@ export default class Me extends Component {
                 </thead>
 
                 <tbody>
-                  {user.jogs.filter(this.filter).sort(displaySort(displayOrder)).map((jog, i) => (
+                  {jogs.filter(this.filter).sort(displaySort(displayOrder)).map((jog, i) => (
                     <TableRowForm
                       key={jog._id || i}
                       jog={jog}

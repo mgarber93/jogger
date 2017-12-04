@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { NEW_JOG, REMOVE_JOG_SUCCESS, UPDATE_JOG_SUCCESS } from './app';
+import cookie from 'js-cookie';
+import { NEW_JOG, REMOVE_JOG_SUCCESS, UPDATE_JOG_SUCCESS } from './jogs';
+
 // Types
 const REGISTER_FAILURE = 'jogger/auth/REGISTER/FAILURE';
-const REGISTER_SUCCESS = 'jogger/auth/REGISTER/SUCCESS';
+export const REGISTER_SUCCESS = 'jogger/auth/REGISTER/SUCCESS';
 
 const LOGIN_FAILURE = 'jogger/auth/LOGIN/FAILURE';
-const LOGIN_SUCCESS = 'jogger/auth/LOGIN/SUCCESS';
+export const LOGIN_SUCCESS = 'jogger/auth/LOGIN/SUCCESS';
 
 const LOGOUT_FAILURE = 'jogger/auth/LOGOUT/FAILURE';
 const LOGOUT_SUCCESS = 'jogger/auth/LOGOUT/SUCCESS';
@@ -42,59 +44,69 @@ export default (state = {}, action = {}) => {
         ...state,
         user: undefined
       };
+    case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       return {
         ...state,
-        user: action.data
+        user: action.user,
       };
     case REGISTER_FAILURE:
       return {
         ...state,
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        user: action.data
       };
     default:
       return { ...state };
   }
 };
 
+function setCookie(token) {
+  cookie.set('jwt', token);
+}
+
 // Action creators
 export function register(name) {
   return (dispatch, getState) => {
-    // dispatch({type: REGISTER});
     const { form } = getState();
-    return axios.post('/auth/local/register', form[name].values).then(
-      data => dispatch(registerSuccess(data)),
-      error => dispatch(registerError(error)),
-    );
+    return axios.post('/auth/local/register', form[name].values)
+      .then(data => dispatch(registerSuccess(data)))
+      .catch(error => dispatch(registerError(error)));
   };
 }
 
 export function login(name) {
   return (dispatch, getState) => {
-    // dispatch({type: LOGIN});
     const { form } = getState();
-    return axios.post('/auth/local/login', form[name].values).then(
-      data => dispatch(loginSuccess(data)),
-      error => dispatch(loginError(error))
-    );
+    return axios.post('/auth/local/login', form[name].values)
+      .then(data => dispatch(loginSuccess(data)))
+      .catch(error => dispatch(loginError(error)));
   };
 }
 
 export function loginSuccess({ data }) {
+  const jogs = data.user.jogs;
+  data.user.jogs = undefined;
+  delete data.user.jogs;
+
+  setCookie(data.token);
+
   return {
-    type: LOGIN_SUCCESS,
-    data,
+    type: REGISTER_SUCCESS,
+    user: data.user,
+    jogs,
   };
 }
 
 export function registerSuccess({ data }) {
+  const jogs = data.user.jogs;
+  data.user.jogs = undefined;
+  delete data.user.jogs;
+
+  setCookie(data.token);
+
   return {
     type: REGISTER_SUCCESS,
-    data,
+    user: data.user,
+    jogs,
   };
 }
 

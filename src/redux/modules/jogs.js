@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import {LOGIN_SUCCESS, REGISTER_SUCCESS} from './auth';
+
 // types
 export const NEW_JOG = 'jogger/app/NEW_JOG';
 export const UPDATE_JOG_SUCCESS = 'jogger/app/UPDATE_JOG_SUCCESS';
@@ -19,6 +21,12 @@ const initState = {
 export default (state = initState, action) => {
   const editing = { ...state.editing };
   switch (action.type) {
+    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        jogs: action.jogs,
+      }
     case START_EDITING:
       editing[action.data] = true;
       return {

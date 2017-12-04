@@ -41,7 +41,7 @@ export default class extends Component {
           </Nav>
           <Nav pullRight>
             {!!user && (
-              <LinkContainer to="/me">
+              <LinkContainer to="/jogs">
                 <NavItem>{user.username}</NavItem>
               </LinkContainer>
             )}

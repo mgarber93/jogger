@@ -5,7 +5,7 @@ import Home from '../Home/Home';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import New from '../New/New';
-import Me from '../Me/Me';
+import Jogs from '../Jogs/Jogs';
 import './App.css';
 
 export default class extends Component {
@@ -16,7 +16,7 @@ export default class extends Component {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/new" component={New} />
-        <Route exact path="/me" component={Me} />
+        <Route exact path="/jogs" component={Jogs} />
       </Switch>
     );
   }
