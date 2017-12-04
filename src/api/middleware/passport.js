@@ -40,4 +40,22 @@ passport.use('local-login', new LocalStrategy({
     }
   }))
 
+passport.use('local-signup', new LocalStrategy({
+  usernameField: 'username',
+  passwordField: 'password',
+  passReqToCallback: true,
+}, async function(req, username, password, done) {
+  try {
+    const account = await new Account({
+      username,
+      password,
+      email: req.body.email,
+    })
+    await account.save();
+    done(null, account.toObject());
+  } catch (e) {
+    done(null, null, {message: 'intermal error!' + e})
+  }
+}))
+
 export default passport;
