@@ -7,6 +7,7 @@ import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 
 import { logout } from '../../redux/modules/auth';
+import './Navbar.css';
 
 
 @connect(({ auth }) => ({ user: auth.user }), { logout })

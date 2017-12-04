@@ -1,4 +1,104 @@
+* {
+  margin:0;
+  padding: 0;
+}
+
+.container {
+  height: 50px;
+}
+
+.navbar-header {
+  max-height: 50px;
+}
+
+.navbar {
+  position: relative;
+  margin-bottom: 20px;
+}
+
 h1 {
-  font-size: '24pt';
+  font-size: 24pt;
   text-align: center;
+}
+
+header {
+  margin-top: -20px;
+  width: 100vw;
+}
+
+#showcase {
+  display:flex;
+  flex-direction: column;
+  background-image: url('/jogger.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+#showcase h1 {
+  font-size: 120pt;
+  line-height: 1.2;
+}
+
+#showcase p {
+  font-size: 25pt;
+}
+
+.button {
+  font-size: 18pt;
+  text-decoration: none;
+  color: rgb(20, 192, 223);
+  border: rgb(20, 192, 223) 1px solid;
+  padding: 10px 30px;
+  border-radius: 10px;
+}
+
+.button:hover {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(5, 218, 255, 0.78);
+}
+
+#showtext {
+  width: 90vw;
+  height: 30vh;
+  background-color: rgba(5, 218, 255, 0.78);
+  color: white;
+  padding: 0px 30px;
+  border-radius: 100px;
+}
+
+#section-a {
+  padding: 20px;
+  background-color: rgba(5, 218, 255, 1);
+  color: white;
+  text-align: center;
+}
+
+#section-b {
+  padding: 20px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+#section-c {
+  display: flex;
+}
+
+#section-c div {
+  padding: 20px;
+}
+
+#section-c .box-1, #section-c .box-3 {
+  background-color: rgba(5, 218, 255, 1);
+  color: white;
+}
+
+#section-c .box-2, #section-c .box-4 {
+  background-color: #f9f9f9;
 }
