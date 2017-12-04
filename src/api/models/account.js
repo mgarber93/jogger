@@ -44,6 +44,9 @@ const Account = new Schema({
     default: 'REGULAR',
   },
   jogs: [jog],
+},{
+  toObject : {getters: true},
+  toJSON   : {getters: true},
 });
 
 
