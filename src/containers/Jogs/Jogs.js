@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Helmet } from 'react-helmet';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
-import Navbar from '../../components/Navbar/Navbar';
 import './Jogs.css';
 import { toggleEditing, stopEditing, changeDisplayOrder, removeJog, updateJog } from '../../redux/modules/jogs';
 import displaySort from '../../utils/sorters.js';
@@ -57,7 +56,6 @@ export default class Jogs extends Component {
     const { aveTime, totDistance, aveSpeed } = user ? average(jogs.filter(this.filter)) : {};
     return (
       <div className="Me">
-        <Navbar />
         <div className="container">
           {user ?
             <div className="table-responsive">

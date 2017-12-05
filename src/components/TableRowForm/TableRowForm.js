@@ -5,7 +5,7 @@ import './TableRowForm.css';
 
 
 @connect(
-  ({ app }) => ({ editing: app.editing }),
+  ({ jogs }) => ({ editing: jogs.editing }),
   { stopEditing, save }
 )
 export default class TableRowForm extends Component {

@@ -14,6 +14,8 @@
 .navbar {
   position: relative;
   margin-bottom: 20px;
+  background-color: #f9f9f9;
+  border-bottom-color: rgb(202, 202, 202);
 }
 
 h1 {
@@ -65,12 +67,16 @@ header {
 }
 
 #showtext {
-  width: 90vw;
+  width: 70vw;
   height: 30vh;
-  background-color: rgba(5, 218, 255, 0.78);
+  background-color: rgb(5, 218, 255);
   color: white;
   padding: 0px 30px;
-  border-radius: 100px;
+  border-radius: 25px;
+  transform: skew(-10deg);
+  -o-transform: skew(-10deg);
+  -moz-transform: skew(-10deg);
+  -webkit-transform: skew(-10deg);
 }
 
 #section-a {

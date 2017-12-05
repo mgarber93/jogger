@@ -1,44 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import Navbar from '../../components/Navbar/Navbar';
+import Landing from './Landing';
+import Jogs from '../Jogs/Jogs';
 import './Home.css';
 
+@connect(({auth}) => ({user:auth.user}))
 export default class Home extends Component {
   render() {
+    const {user} = this.props;
     return (
       <div className="Home" >
         <Helmet title="Home" />
         <Navbar id="navbar" />
-        <header id="showcase">
-          <div id="showtext"> 
-            <h1>Jogger</h1>
-            <p>
-              An example app built on MERN 
-            </p>
-          </div>
-        </header>
-        <section id="section-a">
-          <h1>Simple & Secure</h1>
-          <p> Sessions for AUTH, JWT for REST </p>
-        </section>
-        <section id="section-b">
-          <a href="/login" className="button">Login</a>
-          <a href="/register" className="button">Register</a>
-        </section>
-        <section id="section-c">
-          <div className="box-1">
-            Mongo
-          </div>
-          <div className="box-2">
-            Express
-          </div>
-          <div className="box-3">
-            React
-          </div>
-          <div className="box-4">
-            Node
-          </div>
-        </section>
+        {user ? <Jogs /> : <Landing />}
       </div>
     );
   }
