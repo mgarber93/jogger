@@ -10,8 +10,8 @@ import { Provider } from 'react-redux';
 import session from 'express-session';
 import { createClient as createRedisConnection } from 'redis';
 import { ServerStyleSheet } from 'styled-components';
-import compression from 'compression'
-import { minify } from 'html-minifier'
+import compression from 'compression';
+import { minify } from 'html-minifier';
 
 import { passport } from './api/middleware/';
 import configureStore from './redux';

@@ -8,6 +8,11 @@ function sanitize(doc) {
   return doc;
 }
 
+export function getAllManagables(req, res) {
+  console.log('managables', req.body);
+  res.sendStatus(200);
+}
+
 export function getAccount(req, res) {
   return Account.findById(req.params.accountId)
     .then(account => {

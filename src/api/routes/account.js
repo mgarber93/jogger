@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getAccount, updateAccount, deleteAccount } from '../controllers/account';
+import { getAccount, updateAccount, deleteAccount, getAllManagables } from '../controllers/account';
 import { getJog, newJog, updateJog, deleteJog } from '../controllers/jogs';
 
 const router = express.Router();
@@ -36,6 +36,10 @@ function hasAdminRights(req, res, next) {
     res.status(403).json({errors: {auth: 'You must have admin rights!'}});
   }
 }
+
+router.route('/')
+  .all(hasManagerRights)
+  .get(getAllManagables);
 
 router.route('/:accountId')
   .all(hasManagerRights)
