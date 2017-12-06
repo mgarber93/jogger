@@ -1,6 +1,5 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
-import { NEW_JOG, REMOVE_JOG_SUCCESS, UPDATE_JOG_SUCCESS } from './jogs';
 
 // Types
 const REGISTER_FAILURE = 'jogger/auth/REGISTER/FAILURE';
@@ -14,31 +13,7 @@ const LOGOUT_SUCCESS = 'jogger/auth/LOGOUT/SUCCESS';
 
 // Reducer
 export default (state = {}, action = {}) => {
-  const newUser = { ...state.user };
   switch (action.type) {
-    case NEW_JOG:
-      newUser.jogs.unshift(action.payload);
-      return {
-        ...state,
-        user: newUser,
-      };
-    case REMOVE_JOG_SUCCESS:
-      newUser.jogs = newUser.jogs.filter(j => j._id !== action.id);
-      return {
-        ...state,
-        user: newUser,
-      };
-    case UPDATE_JOG_SUCCESS:
-      newUser.jogs = newUser.jogs.map(j => {
-        if (j._id === action.payload._id) {
-          return action.payload;
-        }
-        return j;
-      });
-      return {
-        ...state,
-        user: newUser,
-      };
     case LOGOUT_SUCCESS:
       return {
         ...state,
@@ -97,11 +72,15 @@ export function loginSuccess({ data }) {
 }
 
 export function registerSuccess({ data }) {
-  const jogs = data.user.jogs;
-  data.user.jogs = undefined;
-  delete data.user.jogs;
+  let jogs = [];
 
-  setCookie(data.token);
+  if (data.user) {
+    jogs = data.user.jogs;
+    data.user.jogs = undefined;
+    delete data.user.jogs;
+  }
+
+  // setCookie(data.token);
 
   return {
     type: REGISTER_SUCCESS,

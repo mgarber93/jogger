@@ -12,7 +12,7 @@ export default (props) =>
     </header>
     <section id="section-a">
       <h1>Simple & Secure</h1>
-      <p> Sessions for AUTH, JWT for REST </p>
+      <p>FullStack JavaScript, Sessions for AUTH</p>
     </section>
     <section id="section-b">
       <a href="/login" className="button">Login</a>
