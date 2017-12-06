@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import {LOGIN_SUCCESS, REGISTER_SUCCESS} from './auth';
 
-// types
+// Types
 export const NEW_JOG = 'jogger/app/NEW_JOG';
 export const UPDATE_JOG_SUCCESS = 'jogger/app/UPDATE_JOG_SUCCESS';
 export const REMOVE_JOG_SUCCESS = 'jogger/app/REMOVE_JOG_SUCCESS';
@@ -18,9 +18,10 @@ const initState = {
   jogs: [],
 };
 
-// reducer
+// Reducer
 export default (state = initState, action) => {
   const editing = { ...state.editing };
+  let jogs = [ ...state.jogs ];
   switch (action.type) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
@@ -30,12 +31,6 @@ export default (state = initState, action) => {
       }
     case START_EDITING:
       editing[action.data] = true;
-      return {
-        ...state,
-        editing,
-      };
-    case UPDATE_JOG_SUCCESS:
-      editing[action.payload._id] = false;
       return {
         ...state,
         editing,
@@ -57,12 +52,37 @@ export default (state = initState, action) => {
         ...state,
         editing,
       };
+    case NEW_JOG:
+      jogs.unshift(action.payload);
+      return {
+        ...state,
+        jogs,
+      };
+    case REMOVE_JOG_SUCCESS:
+      jogs = jogs.filter(j => j._id !== action.id);
+      return {
+        ...state,
+        jogs,
+      };
+    case UPDATE_JOG_SUCCESS:
+      editing[action.payload._id] = false;
+      jogs = jogs.map(j => {
+        if (j._id === action.payload._id) {
+          return action.payload;
+        }
+        return j;
+      });
+      return {
+        ...state,
+        jogs,
+        editing,
+      };
     default:
       return { ...state };
   }
 };
 
-// action dispatchers
+// Action Dispatchers
 export function newJog() {
   return (dispatch, getState) => {
     const { auth, form } = getState();
