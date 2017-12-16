@@ -24,7 +24,7 @@ const RedisStore = require('connect-redis')(session);
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/Jogger', {
+mongoose.connect(process.env.RAZZLE_MONGO_URL, {
   useMongoClient: true
 });
 
@@ -43,7 +43,7 @@ server
       host: 'localhost',
       port: 6379
     }),
-    secret: 'more laughter, more love, more life',
+    secret: process.env.RAZZLE_REDIS_SECRET || 'more laughter, more love, more life',
     resave: false,
     saveUninitialized: false
   }))
