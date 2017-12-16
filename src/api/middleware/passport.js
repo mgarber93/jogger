@@ -36,6 +36,7 @@ passport.use('local-login', new LocalStrategy({
       }
       done(null, null, { message: 'invalid credentials'});
     } catch (e) {
+      console.log(e);
       done(null, null, { message: 'internal error'});
     }
   }))
@@ -54,7 +55,7 @@ passport.use('local-signup', new LocalStrategy({
     await account.save();
     done(null, account.toObject());
   } catch (e) {
-    done(null, null, {message: 'intermal error!' + e})
+    done(null, null, {message: 'internal error!' + e})
   }
 }))
 
